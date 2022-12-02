@@ -7,7 +7,6 @@ object Day1 extends ZIOAppDefault {
   override def run =
     day1.provide(FileListInput.layer("/day1.txt"))
 
-
   def day1:ZIO[FileListInput, Exception, Unit] =
     for {
       _ <- ZIO.logInfo("Running day 1")
