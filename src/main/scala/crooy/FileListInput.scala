@@ -1,13 +1,13 @@
 package crooy
 
 import zio.*
-import zio.ZManaged.Scope
-
+  
 import scala.io.Source
 
 case class FileListInput(name: String, list: List[String])
 
 object FileListInput {
+  
 
   private def create(name: String) = ZIO.succeed {
     val fileStream = getClass.getResourceAsStream(name)

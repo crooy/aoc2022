@@ -1,8 +1,7 @@
 import zio.test.*
 import zio.test.Assertion.*
-import zio.test.Assertion.Render.*
 
-object HelloSpec extends DefaultRunnableSpec:
+object HelloSpec extends ZIOSpecDefault:
 
   val hello = test("outputs hello, world") {
     for

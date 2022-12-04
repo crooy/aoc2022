@@ -2,9 +2,8 @@ package crooy
 import zio.ZLayer
 import zio.test.*
 import zio.test.Assertion.*
-import zio.test.Assertion.Render.*
 
-object Day1Spec extends DefaultRunnableSpec {
+object Day1Spec extends ZIOSpecDefault {
 
   val input =
     "1000" :: "2000" :: "3000" :: "" ::

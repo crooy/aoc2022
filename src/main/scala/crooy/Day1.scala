@@ -1,7 +1,7 @@
 package crooy
 
 import zio.*
-import zio.ZManaged.Scope
+
 
 object Day1 extends ZIOAppDefault {
   override def run =

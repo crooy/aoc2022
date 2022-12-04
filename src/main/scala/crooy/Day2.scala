@@ -35,11 +35,11 @@ object Day2 extends ZIOAppDefault{
     case object Rock extends Choice {
       val intrinsicValue: Int = 1
 
-     val rules = Map(
-       Rock -> Draw,
-       Paper -> Lose,
-       Scissor -> Win
-     )
+      val rules = Map(
+         Rock -> Draw,
+         Paper -> Lose,
+         Scissor -> Win
+       )
   }
 
     case object Paper extends Choice{
