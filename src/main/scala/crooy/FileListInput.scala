@@ -9,6 +9,10 @@ case class FileListInput(name: String, list: List[String])
 object FileListInput {
 
   private def create(name: String) = ZIO.succeed {
+    read(name)
+  }
+
+  def read(name: String) = {
     val fileStream  = getClass.getResourceAsStream(name)
     val inputStream = Source.fromInputStream(fileStream)
     val result      = Source.fromInputStream(fileStream).getLines.toList
