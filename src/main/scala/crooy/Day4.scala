@@ -33,6 +33,7 @@ object Day4 extends ZIOAppDefault {
   object Assignment {
     def parse(input: String): Assignment = input.split(',').toList match {
       case left :: right :: Nil => Assignment(Section.parse(left), Section.parse(right))
+      case _                    => throw RuntimeException("should not happen")
     }
 
     implicit class AssignmentOps(current: Assignment) {
@@ -44,15 +45,18 @@ object Day4 extends ZIOAppDefault {
     lazy val range = Range.inclusive(start, end).toSet
   }
   object Section {
-    def parse(input: String): Section = input.split('-').toList match
+    def parse(input: String): Section = input.split('-').toList match {
       case left :: right :: Nil => Section(left.toInt, right.toInt)
+      case _                    => throw RuntimeException("should not happen")
+    }
 
     def overlapFully(current: Section, other: Section): Option[Section] = {
       val overlap = current.range.intersect(other.range)
-      (overlap == current.range, overlap == other.range) match
+      (overlap == current.range, overlap == other.range) match {
         case (true, _)      => Some(current)
         case (false, true)  => Some(other)
         case (false, false) => None
+      }
     }
 
     def overlap(current: Section, other: Section): Set[Int] = current.range.intersect(other.range)

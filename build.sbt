@@ -10,4 +10,11 @@ libraryDependencies ++= Seq(
   "org.scala-lang.modules" %% "scala-parallel-collections" % "1.0.4"
 )
 
+libraryDependencies += "org.scalactic" %% "scalactic" % "3.2.14"
+libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.14" % "test"
+
 testFrameworks += new TestFramework("zio.test.sbt.ZTestFramework")
+
+scalacOptions ++= Seq(
+  "-no-indent"
+)

@@ -30,11 +30,12 @@ object Day5 extends ZIOAppDefault {
   } yield result
 
   private def moveCrane(input: (CrateState, List[Move]), v1: Boolean): (CrateState, List[Move]) =
-    input match
+    input match {
       case (state, move :: rest) =>
         moveCrane((Move.applyTo(move, state, v1), rest), v1)
 
       case (state, Nil) => (state, Nil)
+    }
 
   private val crate = "\\s?\\[([A-Z]+)\\]\\s?".r
   private def parseColumn(column: List[String]): CrateColumn = column match {
@@ -82,8 +83,9 @@ object Day5 extends ZIOAppDefault {
   case class Move(count: Int, from: Int, to: Int)
   object Move {
     private val moveRegex = "move (\\d+) from (\\d+) to (\\d+)".r
-    def parse(input: String): Move = input match
+    def parse(input: String): Move = input match {
       case moveRegex(count, from, to) => Move(count.toInt, from.toInt, to.toInt)
+    }
 
     def applyTo(move: Move, state: CrateState, v1: Boolean): CrateState = {
       val (crates, oldColumn)    = CrateColumn.take(state(move.from), move.count)
