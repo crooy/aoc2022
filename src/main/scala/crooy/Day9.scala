@@ -18,7 +18,7 @@ object Day9 {
     part2(headTravelled)
   }
 
-  def part2(headTravelled: List[Point]) = {
+  def part2(headTravelled: List[Point[_]]) = {
     val tailRoute1 = Day9.walkTail(Point(0, 0), headTravelled, List(Point(0, 0)))
     val tailRoute2 = Day9.walkTail(Point(0, 0), tailRoute1, List(Point(0, 0)))
     val tailRoute3 = Day9.walkTail(Point(0, 0), tailRoute2, List(Point(0, 0)))
@@ -52,7 +52,7 @@ object Day9 {
   }
 
   @tailrec
-  def walkHead(from: Point, route: List[Vector], headRoute: List[Point]): List[Point] =
+  def walkHead(from: Point[_], route: List[Vector], headRoute: List[Point[_]]): List[Point[_]] =
     route match {
       case current :: next => {
         val travelled = current.walk(from)
@@ -64,7 +64,11 @@ object Day9 {
     }
 
   @tailrec
-  def walkTail(from: Point, stepsOfHead: List[Point], routeOfTail: List[Point]): List[Point] =
+  def walkTail(
+      from: Point[_],
+      stepsOfHead: List[Point[_]],
+      routeOfTail: List[Point[_]]
+  ): List[Point[_]] =
     stepsOfHead match {
       case headLocation :: next if (headLocation.isNeighbour(from)) || headLocation == from =>
         walkTail(from, next, routeOfTail)
@@ -78,7 +82,7 @@ object Day9 {
         tailStep match {
           case Some(value) =>
             println(s"tail step $value for $headLocation")
-            val appendedRoute: List[Point] = routeOfTail :+ value
+            val appendedRoute: List[Point[_]] = routeOfTail :+ value
             walkTail(value, next, appendedRoute)
 
           case None =>
