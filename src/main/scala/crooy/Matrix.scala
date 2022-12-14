@@ -1,10 +1,12 @@
 package crooy
 
+import java.util
+
 // x,y 0,0 == bottom left
 case class Matrix(left: Int, right: Int, top: Int, bottom: Int)
 
 object Matrix {
-  def containing(points: List[Point[_]], padding: Int = 1): Matrix =
+  def containing(points: IterableOnce[Point[_]], padding: Int = 1): Matrix =
     Matrix(
       points.map(_.x).min - padding,
       padding + points.map(_.x).max,
@@ -15,8 +17,9 @@ object Matrix {
   implicit class MatrixOps(matrix: Matrix) {
 
     def asString[T](
-        points: List[Point[T]],
-        printer: (Point[T]) => String
+        points: IterableOnce[Point[T]],
+        printer: (Point[T]) => String,
+        space: String = ""
     ): String = {
       Range
         .inclusive(matrix.top, matrix.bottom, -1)
@@ -24,11 +27,12 @@ object Matrix {
           val line = Range.inclusive(matrix.left, matrix.right).map { x =>
             points.find(p => p.x == x && p.y == y) match {
               case Some(value) => printer(value)
-              case None        => ""
+              case None        => space
             }
           }
           line.mkString("")
         }
+        .reverse
         .mkString("\n")
     }
 
@@ -53,7 +57,7 @@ object Matrix {
     }
   }
 
-  case class Point[T](x: Int, y: Int, value: T = 0)
+  case class Point[+T](x: Int, y: Int, value: T = 0)
 
   case class Vector(x: Int, y: Int)
   object Vector {
