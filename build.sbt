@@ -13,6 +13,8 @@ libraryDependencies ++= Seq(
 libraryDependencies += "org.scalactic" %% "scalactic" % "3.2.14"
 libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.14" % "test"
 
+libraryDependencies += "com.typesafe.play" %% "play-json" % "2.10.0-RC7"
+
 testFrameworks += new TestFramework("zio.test.sbt.ZTestFramework")
 
 scalacOptions ++= Seq(
