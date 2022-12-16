@@ -66,6 +66,7 @@ object Matrix {
     def down(amount: Int)                            = Vector(0, 0 - amount)
     def right(amount: Int)                           = Vector(amount, 0)
     def up(amount: Int)                              = Vector(0, amount)
+
   }
 
   implicit class VectorOps(vector: Vector) {
